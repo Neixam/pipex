@@ -6,7 +6,7 @@
 #    By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 17:08:30 by ambouren          #+#    #+#              #
-#    Updated: 2022/06/24 13:55:12 by ambouren         ###   ########.fr        #
+#    Updated: 2022/06/26 16:59:58 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,20 +30,21 @@ OBJ_PATH=	objs/
 LIB_PATH=	libs/
 SRC_PATH=	$(shell find srcs -type d)
 vpath %.c $(foreach rep, $(SRC_PATH), $(rep))
+vpath %.a $(LIB_PATH)
 LIB		=	libft.a
 SRC		=	main.c \
-			
+
 DEP		=	$(addprefix $(DEP_PATH), $(SRC:.c=.d))
 OBJ		=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 
 #	Compilation
 all		:	$(EXEC)
 
-$(EXEC)			:	$(OBJ) $(LIB)
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+$(EXEC)			:	$(OBJ) $(LIB_PATH)$(LIB)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
 
-%.a				: $(LIB_PATH)%.a
-	@make -C $< install
+%.a				:
+	@make -C $(@:.a=) install 
 
 $(OBJ_PATH)%.o	:	%.c
 	@mkdir -p $(OBJ_PATH) $(DEP_PATH)

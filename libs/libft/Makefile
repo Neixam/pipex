@@ -6,7 +6,7 @@
 #    By: ambouren <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 10:32:43 by ambouren          #+#    #+#              #
-#    Updated: 2021/11/27 20:12:30 by ambouren         ###   ########.fr        #
+#    Updated: 2022/06/26 16:47:33 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,10 +102,7 @@ fclean		:	clean
 
 re			:	fclean all
 
-install		:	re
+install		:	all
 	mv $(NAME) ../
 
-uninstall	: fclean
-	rm -rf ../$(NAME)
-
-.PHONY	:	all clean fclean re install uninstall
+.PHONY	:	all clean fclean re install

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:43:52 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 21:56:10 by ambouren         ###   ########.fr       */
+/*   Created: 2022/06/26 18:35:35 by ambouren          #+#    #+#             */
+/*   Updated: 2022/06/26 21:51:49 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef DATA_H
+# define DATA_H
+# include "cmd.h"
 
-char	*ft_strrchr(const char *s, int c)
+typedef struct s_data
 {
-	int	i;
+	int		fd_in;
+	int		fd_out;
+	char	**env;
+	t_cmds	cmds;
+}	
 
-	i = ft_strlen(s);
-	if (c == 0)
-		return (&((char *)s)[i]);
-	while (--i > -1)
-		if (((char *)s)[i] == (char)c)
-			return (&((char *)s)[i]);
-	return ((char *)s);
-}
+#endif
