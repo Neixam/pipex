@@ -33,7 +33,9 @@ vpath %.c $(foreach rep, $(SRC_PATH), $(rep))
 vpath %.a $(LIB_PATH)
 LIB		=	libft.a
 SRC		=	main.c \
-
+            cmd.c \
+            parsing.c \
+            data.c
 DEP		=	$(addprefix $(DEP_PATH), $(SRC:.c=.d))
 OBJ		=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 

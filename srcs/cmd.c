@@ -54,13 +54,12 @@ int	new_cmd(t_cmds *cmds, char *cmd)
 	return (0);
 }
 
-t_cmds	init_cmds(char **env)
+t_cmds	init_cmds(void)
 {
 	t_cmds	ret;
 
 	ret.size = 0;
 	ret.cmds = 0;
-	ret.env = env;
 	return (ret);
 }
 

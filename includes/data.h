@@ -20,6 +20,8 @@ typedef struct s_data
 	int		fd_out;
 	char	**env;
 	t_cmds	cmds;
-}	
+}	        t_data;
+
+t_data	init_data(char **env);
 
 #endif

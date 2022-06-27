@@ -34,8 +34,8 @@ void	ft_free_tab(char **tab);
 
 void	free_cmds(t_cmds *cmds);
 
-t_cmds	init_cmds(char **env);
+t_cmds	init_cmds(void);
 
-int	launch_cmd(t_cmd *cmd, char **paths);
+int     launch_cmd(t_cmd *cmd, char **paths);
 
 #endif
