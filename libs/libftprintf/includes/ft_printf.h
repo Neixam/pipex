@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 16:11:34 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 20:54:37 by ambouren         ###   ########.fr       */
+/*   Created: 2021/11/29 16:19:14 by ambouren          #+#    #+#             */
+/*   Updated: 2021/11/30 15:42:25 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "data.h"
-#include "parsing.h"
-#include "libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	main(int ac, char **av, char **env)
-{
-	t_data	instance;
+typedef int	(*t_print)(void *);
 
-	if (ac < 5)
-	{
-		ft_putstr_fd("Bad number of param\n", 2);
-		return (1);
-	}
-	instance = init_data(env);
-	if (parsing(ac, av, &instance))
-		return (1);
-	piping(&instance);
-	destroy_data(&instance);
-	return (0);
-}
+int	ft_putchar(void *c);
+int	ft_putstr(void *s);
+int	ft_putnbr(void *n);
+int	ft_puthex(void *x);
+int	ft_putuns(void *u);
+int	ft_putmajhex(void *x);
+int	ft_putadd(void *p);
+int	ft_printf(const char *fmt, ...);
+int	ft_strichr(char *s, char c);
+
+#endif

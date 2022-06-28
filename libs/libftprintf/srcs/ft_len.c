@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_len.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 16:11:34 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 20:54:37 by ambouren         ###   ########.fr       */
+/*   Created: 2021/12/04 15:39:50 by ambouren          #+#    #+#             */
+/*   Updated: 2021/12/07 14:48:06 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "data.h"
-#include "parsing.h"
-#include "libft.h"
+#include "ft_printf_bonus.h"
+#include <unistd.h>
 
-int	main(int ac, char **av, char **env)
+int	ft_putalign(t_flag flag)
 {
-	t_data	instance;
+	char	c;
+	int		ret;
 
-	if (ac < 5)
+	c = ' ';
+	if (ZERO & flag.flag && !(MINUS & flag.flag))
+		c = '0';
+	ret = 0;
+	while (flag.size-- > 0)
+		ret += write(1, &c, 1);
+	return (ret);
+}
+
+int	ft_len(unsigned long n, int base)
+{
+	int	len;
+
+	len = 1;
+	while (n / base)
 	{
-		ft_putstr_fd("Bad number of param\n", 2);
-		return (1);
+		n /= base;
+		len++;
 	}
-	instance = init_data(env);
-	if (parsing(ac, av, &instance))
-		return (1);
-	piping(&instance);
-	destroy_data(&instance);
-	return (0);
+	return (len);
 }

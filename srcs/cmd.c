@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft.h"
+#include "parsing.h"
+#include <unistd.h>
 
 void	ft_free_tab(char **tab)
 {
@@ -32,7 +34,7 @@ int	launch_cmd(t_cmd *cmd, char **paths)
 		perror("pipe");
 		return (1);
 	}
-	if (!find_cmd(cmd, paths))
+	if (!find_path(cmd, paths))
 		return (1);
 	cmd->pid = fork();
 	if (cmd->pid == -1)
@@ -49,6 +51,7 @@ int	new_cmd(t_cmds *cmds, char *cmd)
 
 	pos = cmds->size++;
 	cmds->cmds[pos].arg = ft_split(cmd, ' ');
+	cmds->cmds[pos].path = 0;
 	if (!cmds->cmds[pos].arg)
 		return (1);
 	return (0);
@@ -67,8 +70,9 @@ void	free_cmds(t_cmds *cmds)
 {
 	while (cmds->size)
 	{
+		if (cmds->cmds[cmds->size].path)
+			free(cmds->cmds[cmds->size].path);
 		ft_free_tab(cmds->cmds[--cmds->size].arg);
-
 	}
 	free(cmds->cmds);
 }

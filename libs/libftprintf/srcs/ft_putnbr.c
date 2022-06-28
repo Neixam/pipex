@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 16:11:34 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 20:54:37 by ambouren         ###   ########.fr       */
+/*   Created: 2021/11/29 16:29:38 by ambouren          #+#    #+#             */
+/*   Updated: 2021/11/30 15:12:10 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "data.h"
-#include "parsing.h"
-#include "libft.h"
+#include "ft_printf.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_putnbr_aux(long n)
 {
-	t_data	instance;
+	int		ret;
+	char	c;
 
-	if (ac < 5)
+	ret = 0;
+	if (n < 0)
 	{
-		ft_putstr_fd("Bad number of param\n", 2);
-		return (1);
+		c = '-';
+		ret += ft_putchar(&c);
+		return (ret + ft_putnbr_aux(-n));
 	}
-	instance = init_data(env);
-	if (parsing(ac, av, &instance))
-		return (1);
-	piping(&instance);
-	destroy_data(&instance);
-	return (0);
+	if (n < 10)
+	{
+		c = n + '0';
+		return (ret + ft_putchar(&c));
+	}
+	ret += ft_putnbr_aux(n / 10);
+	return (ret + ft_putnbr_aux(n % 10));
+}
+
+int	ft_putnbr(void *n)
+{
+	int	nb;
+
+	nb = *((int *)n);
+	return (ft_putnbr_aux(nb));
 }

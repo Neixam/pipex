@@ -20,8 +20,8 @@ red		=	\033[31m
 CC      =	gcc
 
 CFLAGS  =	-Wall -Wextra -Werror -g
-IFLAGS	=	-I includes/ -I libs/libft/includes/
-LDFLAGS	=	-L libs/ -lft
+IFLAGS	=	-I includes/ -I libs/libft/includes/ -I libs/libftprintf/includes/
+LDFLAGS	=	-L libs/ -lft -lftprintf
 EXEC	=	pipex
 
 INC_PATH=	includes/
@@ -31,18 +31,20 @@ LIB_PATH=	libs/
 SRC_PATH=	$(shell find srcs -type d)
 vpath %.c $(foreach rep, $(SRC_PATH), $(rep))
 vpath %.a $(LIB_PATH)
-LIB		=	libft.a
+LIB		=	libft.a \
+			libftprintf.a
 SRC		=	main.c \
             cmd.c \
             parsing.c \
-            data.c
+            data.c \
+			ft_error.c
 DEP		=	$(addprefix $(DEP_PATH), $(SRC:.c=.d))
 OBJ		=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 
 #	Compilation
 all		:	$(EXEC)
 
-$(EXEC)			:	$(OBJ) $(LIB_PATH)$(LIB)
+$(EXEC)			:	$(OBJ) $(addprefix $(LIB_PATH), $(LIB))
 	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
 
 %.a				:
@@ -63,6 +65,7 @@ clean	:
 fclean	:	clean
 	rm -rf $(EXEC)
 	rm -rf $(addprefix $(LIB_PATH), $(LIB))
+	$(foreach lib, $(LIB), $(shell make -C $(LIB_PATH)$(lib:.a=) fclean))
 
 re		:	fclean all
 

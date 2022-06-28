@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strichr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 16:11:34 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 20:54:37 by ambouren         ###   ########.fr       */
+/*   Created: 2021/11/30 15:35:26 by ambouren          #+#    #+#             */
+/*   Updated: 2021/11/30 15:36:14 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "data.h"
-#include "parsing.h"
-#include "libft.h"
-
-int	main(int ac, char **av, char **env)
+int	ft_strichr(char *s, char c)
 {
-	t_data	instance;
+	int	i;
 
-	if (ac < 5)
-	{
-		ft_putstr_fd("Bad number of param\n", 2);
-		return (1);
-	}
-	instance = init_data(env);
-	if (parsing(ac, av, &instance))
-		return (1);
-	piping(&instance);
-	destroy_data(&instance);
-	return (0);
+	i = -1;
+	while (s[++i])
+		if (s[i] == c)
+			return (i);
+	return (-1);
 }

@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 16:11:34 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 20:54:37 by ambouren         ###   ########.fr       */
+/*   Created: 2021/11/29 16:27:19 by ambouren          #+#    #+#             */
+/*   Updated: 2021/11/30 15:11:36 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "data.h"
-#include "parsing.h"
-#include "libft.h"
+#include "ft_printf.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_putstr(void *s)
 {
-	t_data	instance;
+	int	ret;
 
-	if (ac < 5)
-	{
-		ft_putstr_fd("Bad number of param\n", 2);
-		return (1);
-	}
-	instance = init_data(env);
-	if (parsing(ac, av, &instance))
-		return (1);
-	piping(&instance);
-	destroy_data(&instance);
-	return (0);
+	ret = 0;
+	if (!s)
+		return (ft_putstr("(null)"));
+	while (((char *)s)[ret])
+		ret += ft_putchar(&((char *)s)[ret]);
+	return (ret);
 }

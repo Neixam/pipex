@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putuns.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 16:11:34 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 20:54:37 by ambouren         ###   ########.fr       */
+/*   Created: 2021/12/04 12:59:00 by ambouren          #+#    #+#             */
+/*   Updated: 2021/12/04 13:03:11 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "data.h"
-#include "parsing.h"
-#include "libft.h"
+#include "ft_printf.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_putuns_aux(unsigned int n)
 {
-	t_data	instance;
+	int	ret;
 
-	if (ac < 5)
+	if (n < 10)
 	{
-		ft_putstr_fd("Bad number of param\n", 2);
-		return (1);
+		n += '0';
+		return (ft_putchar(&n));
 	}
-	instance = init_data(env);
-	if (parsing(ac, av, &instance))
-		return (1);
-	piping(&instance);
-	destroy_data(&instance);
-	return (0);
+	ret = ft_putuns_aux(n / 10);
+	return (ret + ft_putuns_aux(n % 10));
+}
+
+int	ft_putuns(void *u)
+{
+	unsigned int	n;
+
+	n = *((unsigned int *)u);
+	return (ft_putuns_aux(n));
 }

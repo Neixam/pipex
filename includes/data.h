@@ -19,9 +19,12 @@ typedef struct s_data
 	int		fd_in;
 	int		fd_out;
 	char	**env;
+	char	**paths;
 	t_cmds	cmds;
 }	        t_data;
 
 t_data	init_data(char **env);
+
+void	destroy_data(t_data *instance);
 
 #endif
