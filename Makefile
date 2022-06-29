@@ -19,7 +19,7 @@ red		=	\033[31m
 
 CC      =	gcc
 
-CFLAGS  =	-Wall -Wextra -Werror -fsanitize=address
+CFLAGS  =	-Wall -Wextra -Werror -g
 IFLAGS	=	-I includes/ -I libs/libft/includes/
 LDFLAGS	=	-L libs/ -lft
 EXEC	=	pipex
