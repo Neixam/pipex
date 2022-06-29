@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 16:11:34 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/29 10:36:31 by ambouren         ###   ########.fr       */
+/*   Created: 2021/11/23 15:49:16 by ambouren          #+#    #+#             */
+/*   Updated: 2021/11/27 19:43:31 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data.h"
-#include "parsing.h"
 #include "libft.h"
-#include "pipe.h"
-#include "ft_error.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_data	instance;
+	int	i;
 
-	if (ac != 5)
-		return (ft_puterror("Bad number of param\n"));
-	instance = init_data(env);
-	if (parsing(ac, av, &instance))
-		return (1);
-	piping(&instance);
-	destroy_data(&instance);
-	return (0);
+	i = 0;
+	while (((char *)s1)[i] && ((char *)s2)[i] &&
+		((char *)s1)[i] == ((char *)s2)[i])
+		i++;
+	return ((((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]));
 }

@@ -19,7 +19,7 @@ red		=	\033[31m
 
 CC      =	gcc
 
-CFLAGS  =	-Wall -Wextra -Werror -g
+CFLAGS  =	-Wall -Wextra -Werror -fsanitize=address
 IFLAGS	=	-I includes/ -I libs/libft/includes/
 LDFLAGS	=	-L libs/ -lft
 EXEC	=	pipex
@@ -38,7 +38,7 @@ SRC		=	main.c \
             data.c \
 			ft_error.c \
 			pipe.c
-BONUS	=	main_bonus \
+BONUS	=	main_bonus.c \
             cmd.c \
             parsing_bonus.c \
             data.c \

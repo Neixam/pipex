@@ -75,7 +75,7 @@ int	parsing(int ac, char **av, t_data *instance)
 	if (instance->fd_out == -1)
 		perror("open");
 	instance->cmds.cmds = (t_cmd *)malloc(sizeof(t_cmd) * (ac - 3));
-	ft_error("malloc", instance, !instance->cmds.cmd);
+	ft_error("malloc", instance, !instance->cmds.cmds);
 	instance->paths = ft_pathfinder(instance->env);
 	ft_error("malloc", instance, !instance->paths);
 	i = 1;

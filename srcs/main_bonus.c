@@ -10,10 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_error.h"
 #include "data.h"
 #include "parsing.h"
 #include "libft.h"
 #include "pipe.h"
+#include <unistd.h>
 
 int	main(int ac, char **av, char **env)
 {

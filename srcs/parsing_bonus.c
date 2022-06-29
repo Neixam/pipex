@@ -68,11 +68,11 @@ void	here_doc(t_data *instance, char **av)
 	char	*line;
 
 	instance->fd_in = open("here_doc", O_WRONLY | O_TRUNC | O_CREAT,
-		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	ft_error("open", )
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	ft_error("open", instance, instance->fd_in == -1);
 	while (1)
 	{
-		ft_putstr("heredoc> ");
+		ft_putstr_fd("heredoc> ", 1);
 		line = get_next_line(0);
 		ft_error("malloc", instance, !line);
 		if (ft_strcmp(line, av[2]) == '\n')
@@ -92,8 +92,8 @@ int	parsing_bonus(int ac, char **av, t_data *instance)
 	instance->fd_in = open(av[1], O_RDONLY);
 	if (instance->fd_in == -1)
 		perror("open");
-	instance->fd_out = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT,
-		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	instance->fd_out = open(av[ac - 1], O_WRONLY | O_APPEND | O_CREAT,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (instance->fd_out == -1)
 		perror("open");
 	instance->cmds.cmds = (t_cmd *)malloc(sizeof(t_cmd) * (ac - 4));
@@ -116,8 +116,8 @@ int	parsing(int ac, char **av, t_data *instance)
 	instance->fd_in = open(av[1], O_RDONLY);
 	if (instance->fd_in == -1)
 		perror("open");
-	instance->fd_out = open(av[ac - 1], O_WRONLY | O_APPEND | O_CREAT,
-		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	instance->fd_out = open(av[ac - 1], O_WRONLY | O_TRUN | O_CREAT,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (instance->fd_out == -1)
 		perror("open");
 	instance->cmds.cmds = (t_cmd *)malloc(sizeof(t_cmd) * (ac - 3));
