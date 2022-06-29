@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:50:48 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 21:04:41 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/29 08:28:20 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_free_tab(char **tab)
 
 	i = 0;
 	while (tab[i])
-		free(tab[i]);
+		free(tab[i++]);
 	free(tab);
 }
 
@@ -70,9 +70,9 @@ void	free_cmds(t_cmds *cmds)
 {
 	while (cmds->size)
 	{
-		if (cmds->cmds[cmds->size].path)
+		if (cmds->cmds[--cmds->size].path)
 			free(cmds->cmds[cmds->size].path);
-		ft_free_tab(cmds->cmds[--cmds->size].arg);
+		ft_free_tab(cmds->cmds[cmds->size].arg);
 	}
 	free(cmds->cmds);
 }

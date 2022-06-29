@@ -6,7 +6,7 @@
 #    By: ambouren <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 10:32:43 by ambouren          #+#    #+#              #
-#    Updated: 2022/06/26 16:47:33 by ambouren         ###   ########.fr        #
+#    Updated: 2022/06/29 09:24:46 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,9 @@ SRC		=	ft_isalpha.c \
 			ft_lstdelone.c \
 			ft_lstclear.c \
 			ft_lstiter.c \
-			ft_lstmap.c
+			ft_lstmap.c \
+			get_next_line_utils.c \
+			get_next_line.c
 SRC_PATH=	$(shell find srcs -type d)
 vpath %.c $(foreach rep, $(SRC_PATH), $(rep))
 

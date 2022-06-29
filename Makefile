@@ -6,7 +6,7 @@
 #    By: ambouren <ambouren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/29 17:08:30 by ambouren          #+#    #+#              #
-#    Updated: 2022/06/26 16:59:58 by ambouren         ###   ########.fr        #
+#    Updated: 2022/06/29 09:53:54 by ambouren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ red		=	\033[31m
 CC      =	gcc
 
 CFLAGS  =	-Wall -Wextra -Werror -g
-IFLAGS	=	-I includes/ -I libs/libft/includes/ -I libs/libftprintf/includes/
-LDFLAGS	=	-L libs/ -lft -lftprintf
+IFLAGS	=	-I includes/ -I libs/libft/includes/
+LDFLAGS	=	-L libs/ -lft
 EXEC	=	pipex
 
 INC_PATH=	includes/
@@ -31,20 +31,27 @@ LIB_PATH=	libs/
 SRC_PATH=	$(shell find srcs -type d)
 vpath %.c $(foreach rep, $(SRC_PATH), $(rep))
 vpath %.a $(LIB_PATH)
-LIB		=	libft.a \
-			libftprintf.a
+LIB		=	libft.a
 SRC		=	main.c \
             cmd.c \
             parsing.c \
             data.c \
-			ft_error.c
+			ft_error.c \
+			pipe.c
+BONUS	=	main_bonus \
+            cmd.c \
+            parsing_bonus.c \
+            data.c \
+			ft_error.c \
+			pipe_bonus.c
 DEP		=	$(addprefix $(DEP_PATH), $(SRC:.c=.d))
 OBJ		=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
+BON_OBJ	=	$(addprefix $(OBJ_PATH), $(BONUS:.c=.o))
 
 #	Compilation
 all		:	$(EXEC)
 
-$(EXEC)			:	$(OBJ) $(addprefix $(LIB_PATH), $(LIB))
+$(EXEC)			:	$(addprefix $(LIB_PATH), $(LIB)) $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS)
 
 %.a				:
@@ -65,8 +72,12 @@ clean	:
 fclean	:	clean
 	rm -rf $(EXEC)
 	rm -rf $(addprefix $(LIB_PATH), $(LIB))
-	$(foreach lib, $(LIB), $(shell make -C $(LIB_PATH)$(lib:.a=) fclean))
+	make -C $(LIB_PATH)$(LIB:.a=) fclean
+# $(foreach lib, $(LIB), $(shell make -C $(LIB_PATH)$(lib:.a=) fclean))
 
 re		:	fclean all
 
-.PHONY	:	all clean fclean re
+bonus	:	$(addprefix $(LIB_PATH), $(LIB)) $(BON_OBJ)
+	$(CC) $(CFLAGS) -o $(EXEC) $(BON_OBJ) $(LDFLAGS)
+
+.PHONY	:	all clean fclean re bonus

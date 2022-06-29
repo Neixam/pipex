@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/29 08:24:02 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/29 10:34:52 by ambouren         ###   ########.fr       */
+/*   Created: 2022/06/29 09:13:19 by ambouren          #+#    #+#             */
+/*   Updated: 2022/06/29 10:36:52 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "data.h"
+#include "parsing.h"
 #include "libft.h"
+#include "pipe.h"
 
-void	ft_error(char *err, t_data *instance, int test)
+int	main(int ac, char **av, char **env)
 {
-	if (!test)
-		return ;
-	perror(err);
-	destroy_data(instance);
-	exit(1);
-}
+	t_data	instance;
 
-int	ft_puterror(char *err)
-{
-	ft_putstr_fd(err, 2);
-	return (1);
+	if (ac < 5)
+		return (ft_puterror("Few number of param\n"));
+	instance = init_data(env);
+	if (parsing(ac, av, &instance))
+		return (1);
+	piping(&instance);
+	if (!ft_strcmp("here_doc", av[1]))
+		ft_error("unlink", &instance, unlink(av[1]) == -1);
+	destroy_data(&instance);
+	return (0);
 }

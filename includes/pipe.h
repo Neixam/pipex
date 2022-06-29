@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strichr.c                                       :+:      :+:    :+:   */
+/*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 15:35:26 by ambouren          #+#    #+#             */
-/*   Updated: 2021/11/30 15:36:14 by ambouren         ###   ########.fr       */
+/*   Created: 2022/06/29 08:49:18 by ambouren          #+#    #+#             */
+/*   Updated: 2022/06/29 08:51:33 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strichr(char *s, char c)
-{
-	int	i;
+#ifndef PIPE_H
+# define PIPE_H
+# include "data.h"
 
-	i = -1;
-	while (s[++i])
-		if (s[i] == c)
-			return (i);
-	return (-1);
-}
+void	piping(t_data *instance);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:11:45 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 21:05:21 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:09:06 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	free_cmds(t_cmds *cmds);
 
 t_cmds	init_cmds(void);
 
-int     launch_cmd(t_cmd *cmd, char **paths);
+int		launch_cmd(t_cmd *cmd, char **paths);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ambouren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:35:35 by ambouren          #+#    #+#             */
-/*   Updated: 2022/06/26 21:51:49 by ambouren         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:08:21 by ambouren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_data
 	char	**env;
 	char	**paths;
 	t_cmds	cmds;
-}	        t_data;
+}			t_data;
 
 t_data	init_data(char **env);
 
